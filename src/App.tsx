@@ -55,13 +55,11 @@ function App() {
 						case Event.PRESENCE_UPDATE:
 							setUser(data.d.discord_user);
 
-							if (data.d.activities[0].type === 4) {
+							if (data.d.activities[0]?.type === 4) {
 								data.d.activities.shift();
 							}
 
 							const currentActivity = data.d.activities[0];
-
-							console.log(data.d);
 
 							switch (currentActivity?.type) {
 								case ActivityType.Spotify:
@@ -97,11 +95,9 @@ function App() {
 									return setActivity({
 										status: data.d.discord_status,
 										name: "Idling",
-										details: "I'm currently AFK",
-										large_icon: "https://raw.githubusercontent.com/twitter/twemoji/master/assets/svg/1f30a.svg",
-										state: "Probably doing some school work.",
-										timestamp_start: Date.now(),
-										elapsed: Date.now(),
+										details: "I'm currently AFK/offline",
+										large_icon: "https://twemoji.maxcdn.com/2/svg/1f44b.svg",
+										state: "I'll be right back!",
 									});
 							}
 					}
