@@ -1,6 +1,6 @@
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-	plugins: [react()],
+	plugins: [svelte()],
 });

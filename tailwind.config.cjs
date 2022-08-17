@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+	content: ["./src/**/*.{html,js,svelte,ts}", "./index.html"],
 	theme: {
 		fontFamily: {
 			sans: ["Inter", "sans-serif"],

@@ -1,3 +1,5 @@
+import type { Op, Event } from "./enums";
+
 export interface Data {
 	spotify: Spotify | null;
 	kv: { [key: string]: string };
@@ -87,19 +89,10 @@ export interface Card {
 	elapsed?: number | null;
 }
 
-export enum Op {
-	Event,
-	Hello,
-	Initialize,
-	Heartbeat,
-}
-
-export enum Event {
-	INIT_STATE = "INIT_STATE",
-	PRESENCE_UPDATE = "PRESENCE_UPDATE",
-}
-
-export enum ActivityType {
-	Spotify = 2,
-	Lambda = 0,
+export interface Repository {
+	name: string;
+	stargazers_count: number;
+	description: string;
+	language: string;
+	html_url: string;
 }
