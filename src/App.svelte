@@ -142,7 +142,7 @@
 
 {#if user && repositories}
 	<div class="flex bg-black text-white h-full">
-		<div class="flex flex-col mx-auto my-20 w-[26rem] space-y-4">
+		<div class="flex flex-col mx-auto my-20 w-[24.5rem] space-y-4">
 			<div class="flex items-center justify-between">
 				<div class="flex space-x-2 items-center">
 					<div class="relative">
