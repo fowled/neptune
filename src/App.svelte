@@ -19,6 +19,11 @@
 		{ icon: Github, href: "https://github.com/fowled" },
 	];
 
+	const repositoryLanguageEmoji = {
+		TypeScript: "🔵",
+		Svelte: "🟠",
+	};
+
 	let heartbeat: NodeJS.Timeout,
 		user: DiscordUser,
 		activity: Card,
@@ -218,7 +223,7 @@
 					<p class="text-base">{repository.description}</p>
 
 					<div class="flex flex-row space-x-2">
-						🔵 {repository.language} - ⭐{repository.stargazers_count}
+						{repositoryLanguageEmoji[repository.language]} {repository.language} - ⭐{repository.stargazers_count}
 					</div>
 				</div>
 			{/each}
