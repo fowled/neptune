@@ -1,6 +1,6 @@
-import type { RequestHandler } from "./$types";
-
 import { SECRET_WEBHOOK } from "$env/static/private";
+
+import type { RequestHandler } from "./$types";
 
 export const POST: RequestHandler = (async ({ fetch, request, getClientAddress }) => {
 	const { message } = await request.json();

@@ -28,7 +28,7 @@
 
 	$: buttons = [
 		{ name: "info", label: "User Info" },
-		{ name: "activity", label: "Activity", enabled: activities ? true : false },
+		{ name: "activity", label: "Activity", enabled: activities?.length > 0 ? true : false },
 		{ name: "message", label: "Send message" }
 	];
 
@@ -39,9 +39,9 @@
 	];
 
 	const connections = [
-		{ name: "Telegram", icon: "telegram", username: "fowled" },
-		{ name: "Twitter", icon: "twitter", username: "fowledsucks" },
-		{ name: "GitHub", icon: "github", username: "fowled" }
+		{ name: "Telegram", icon: "telegram", username: "fowled", url: "https://t.me/fowled" },
+		{ name: "Twitter", icon: "twitter", username: "fowledsucks", url: "https://twitter.com/fowledsucks" },
+		{ name: "GitHub", icon: "github", username: "fowled", url: "https://github.com/fowled" }
 	];
 
 	let activeTab = "info";
@@ -62,6 +62,11 @@
 		Socket();
 	});
 </script>
+
+<svelte:head>
+	<title>Neptune</title>
+    <link rel="icon" href="/statuses/idle.png" />
+</svelte:head>
 
 {#if $lanyard}
 	<div class="flex items-center min-h-screen bg-zinc-800 text-white">
@@ -114,15 +119,20 @@
 						</div>
 					{/each}
 
-					<span class="min-w-full min-h-[0.5px] bg-zinc-700 !mt-8" />
+					<div class="min-w-full min-h-[1px] bg-zinc-700 !mt-8" />
 
 					<div class="grid grid-cols-2 gap-x-4 gap-y-4">
 						{#each connections as connection}
 							<div class="rounded-md p-3 items-center flex flex-row text-center border-zinc-700 border-[1px]">
 								<img src={`/icons/${connection.icon}.svg`} alt={connection.name} class="w-6 h-6" />
+
 								<p class="font-semibold ml-2 mr-1">{connection.username}</p>
+
 								<img src="/icons/verified.svg" alt="verified tick" class="w-4 h-4" />
-								<img src="/icons/open_arrow.svg" alt="open arrow" class="w-2.5 h-2.5 ml-auto" />
+
+								<a href={connection.url} class="ml-auto">
+									<img src="/icons/open_arrow.svg" alt="open arrow" class="w-2.5 h-2.5" />
+								</a>
 							</div>
 						{/each}
 					</div>
@@ -136,16 +146,12 @@
 					{/each}
 				{:else if activeTab === "message"}
 					<form method="post" class="w-full flex flex-row items-center space-x-2">
+						<input type="text" class="input" name="message" minlength="1" placeholder="hi!" required />
 						<input
-							type="text"
-							class="bg-black rounded-lg placeholder:text-zinc-500 focus:outline-violet-600 outline-none w-full p-3 h-10 text-sm"
-							name="message"
-							minlength="1"
-							placeholder="hi!"
-							required
+							type="submit"
+							value="Send"
+							class="cursor-pointer hover:bg-purple-700 bg-purple-500 rounded-lg p-1.5"
 						/>
-
-						<input type="submit" class="cursor-pointer hover:bg-purple-700 bg-purple-500 rounded-lg p-1.5" />
 					</form>
 				{/if}
 			</div>

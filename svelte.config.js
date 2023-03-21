@@ -1,15 +1,14 @@
 import { vitePreprocess } from "@sveltejs/kit/vite";
-import adapter from "@sveltejs/adapter-auto";
-import switchCase from "svelte-switch-case";
+import adapter from "@sveltejs/adapter-vercel";
 import path from "path";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [vitePreprocess(), switchCase()],
+	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter(),
 		alias: {
-			"@": path.resolve("./src/"),
+			"@": path.resolve("./src/")
 		}
 	}
 };

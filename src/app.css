@@ -53,6 +53,10 @@
 	.scrollbar::-webkit-scrollbar-thumb {
 		@apply bg-[#ffffff3d] rounded-full;
 	}
+
+    .input {
+        @apply bg-black rounded-lg placeholder:text-zinc-500 focus:outline-violet-600 outline-none w-full p-3 h-10 text-sm;
+    }
 }
 
 @font-face {
