@@ -10,7 +10,6 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			"@": path.resolve("./src/"),
-			"config.json": path.resolve("./src/config.json")
 		}
 	}
 };

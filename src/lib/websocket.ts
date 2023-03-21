@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-import { id } from "config.json";
+import { PUBLIC_ID } from "$env/static/public";
 
 import { Op, errors } from "@/types/websocket";
 
@@ -21,7 +21,7 @@ export function Socket() {
 
 		switch (msg.op) {
 			case Op.Hello: {
-				websocket.send(JSON.stringify({ op: Op.Initialize, d: { subscribe_to_ids: [id] } }));
+				websocket.send(JSON.stringify({ op: Op.Initialize, d: { subscribe_to_ids: [PUBLIC_ID] } }));
 
 				return setInterval(() => {
 					websocket.send(JSON.stringify({ op: Op.Heartbeat }));
@@ -31,7 +31,7 @@ export function Socket() {
 			case Op.Event: {
 				switch (msg.t) {
 					case "INIT_STATE": {
-						return lanyard.set((<{ [id: string]: Lanyard }>msg.d)[id]);
+						return lanyard.set((<{ [id: string]: Lanyard }>msg.d)[PUBLIC_ID]);
 					}
 
 					case "PRESENCE_UPDATE": {

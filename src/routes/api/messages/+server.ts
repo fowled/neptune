@@ -1,6 +1,6 @@
 import type { RequestHandler } from "./$types";
 
-import { webhook } from "config.json";
+import { SECRET_WEBHOOK } from "$env/static/private";
 
 export const POST: RequestHandler = (async ({ fetch, request, getClientAddress }) => {
 	const { message } = await request.json();
@@ -33,7 +33,7 @@ export const POST: RequestHandler = (async ({ fetch, request, getClientAddress }
 		]
 	};
 
-	await fetch(webhook, {
+	await fetch(SECRET_WEBHOOK, {
 		method: "POST",
 		headers: {
 			"Content-type": "application/json"

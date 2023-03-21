@@ -1,7 +1,7 @@
 import type { Repository } from "@/types/github";
 import type { RequestHandler } from "./$types";
 
-import { pat } from "config.json";
+import { SECRET_GITHUB_PAT } from "$env/static/private";
 
 export const GET: RequestHandler = async ({ setHeaders }) => {
 	const repos = ["mango", "scratchlib", "sapphire", "amethyst", "neptune"];
@@ -9,7 +9,7 @@ export const GET: RequestHandler = async ({ setHeaders }) => {
 	const info = [] as Repository[];
 
 	const headers = {
-		headers: { Authorization: `Bearer ${pat}` }
+		headers: { Authorization: `Bearer ${SECRET_GITHUB_PAT}` }
 	};
 
 	await Promise.all(

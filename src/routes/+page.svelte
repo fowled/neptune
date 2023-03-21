@@ -8,7 +8,7 @@
 	import { Socket, lanyard } from "@/lib/websocket";
 	import { snowflake } from "@/lib/snowflake";
 
-	import { id } from "config.json";
+	import { PUBLIC_ID } from "$env/static/public";
 
 	import { Activities } from "@/types/lanyard";
 
@@ -70,7 +70,7 @@
 				<img src="/banner.png" alt="banner" class="w-full h-full z-30 mask-banner" />
 
 				<img
-					src={`https://api.lanyard.rest/${id}.png`}
+					src={`https://api.lanyard.rest/${PUBLIC_ID}.png`}
 					class="rounded-full z-[60] absolute -bottom-[48px] left-[24px] w-[120px] h-[120px] mx-auto"
 					alt="pfp"
 				/>
