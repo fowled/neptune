@@ -1,10 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ["./src/**/*.{html,js,svelte,ts}", "./index.html"],
+	content: ["./src/**/*.{html,js,svelte,ts}"],
 	theme: {
-		fontFamily: {
-			sans: ["Inter", "sans-serif"],
-		},
+		extend: {
+			fontFamily: {
+				sans: ["GG"],
+				ginto: ["Ginto"],
+			}
+		}
 	},
-	plugins: [],
+	plugins: []
 };

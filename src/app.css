@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.profile {
+		@apply m-auto 
+        relative
+        flex flex-col 
+        pb-6 p-1
+        max-h-[650px] w-[38rem]
+        rounded-lg
+        before:bg-[#0009] before:absolute before:h-[calc(100%-8px)] before:w-[calc(100%-8px)] before:rounded-lg;
+	}
+
+	.content {
+		@apply bg-[#00000073] 
+        overflow-hidden hover:overflow-y-scroll 
+        w-[93%] 
+        min-h-full 
+        rounded-lg 
+        mx-auto mt-8 
+        z-30 
+        p-3 
+        flex flex-col space-y-4
+        scrollbar;
+		scrollbar-gutter: stable;
+	}
+
+    .mask-banner {
+        mask: url("/masks/banner.svg");
+        -webkit-mask: url("/masks/banner.svg");
+    }
+
+    .mask-game {
+        mask: url("/masks/game.svg");
+        -webkit-mask: url("/masks/game.svg");
+    }
+
+	.profile-gradient {
+		background: linear-gradient(#471f61, #471f61 120px, #640ec7);
+	}
+
+	.scrollbar {
+		scrollbar-color: #ffffff3d transparent;
+		scrollbar-width: thin;
+	}
+
+	.scrollbar::-webkit-scrollbar {
+		@apply w-1.5;
+	}
+
+	.scrollbar::-webkit-scrollbar-thumb {
+		@apply bg-[#ffffff3d] rounded-full;
+	}
+}
+
+@font-face {
+	font-family: "GG";
+	font-weight: 100;
+	src: url("/fonts/gg-sans/gg_sans_Normal.ttf");
+}
+
+@font-face {
+	font-family: "GG";
+	font-weight: 300;
+	src: url("/fonts/gg-sans/gg_sans_Medium.ttf");
+}
+
+@font-face {
+	font-family: "GG";
+	font-weight: 600;
+	src: url("/fonts/gg-sans/gg_sans_Semibold.ttf");
+}
+
+@font-face {
+	font-family: "GG";
+	font-weight: 900;
+	src: url("/fonts/gg-sans/gg_sans_Bold.ttf");
+}
+
+@font-face {
+	font-family: "Ginto";
+	font-weight: 500;
+	src: url("/fonts/ginto/Ginto-Nord-500.woff");
+}
+
+@font-face {
+	font-family: "Ginto";
+	font-weight: 600;
+	src: url("/fonts/ginto/Ginto-Nord-600.woff");
+}
+
+@font-face {
+	font-family: "Ginto";
+	font-weight: 700;
+	src: url("/fonts/ginto/Ginto-Nord-700.woff");
+}
