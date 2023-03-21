@@ -87,8 +87,8 @@
 				/>
 			</div>
 
-            <div class="relative pb-10">
-                <div class="flex flex-row space-x-0.5 z-30 w-fit absolute right-2 sm:left-40 mt-4 bg-[#00000073] px-1 py-0.5 rounded-lg">
+            <div class="relative">
+                <div class="flex flex-row space-x-0.5 z-30 w-fit absolute right-5 sm:left-40 mt-4 bg-[#00000073] px-1 py-0.5 rounded-lg">
                     {#each badges as badge}
                         <img src={`/badges/${badge.icon}.svg`} alt={badge.name} />
                     {/each}
