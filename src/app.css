@@ -19,7 +19,7 @@
         w-[93%] 
         min-h-full 
         rounded-lg 
-        mx-auto mt-8 
+        mx-auto mt-[3vh] sm:mt-8 
         z-30 
         p-3 
         flex flex-col space-y-4
@@ -28,13 +28,15 @@
 	}
 
     .mask-banner {
+        -webkit-mask-image: url("/masks/banner.svg");
         mask: url("/masks/banner.svg");
-        -webkit-mask: url("/masks/banner.svg");
+        -webkit-mask-size: cover;
     }
 
     .mask-game {
+        -webkit-mask-image: url("/masks/game.svg");
+        -webkit-mask-size: 100%;
         mask: url("/masks/game.svg");
-        -webkit-mask: url("/masks/game.svg");
     }
 
 	.profile-gradient {

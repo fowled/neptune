@@ -65,7 +65,7 @@
 
 <svelte:head>
 	<title>Neptune</title>
-    <link rel="icon" href="/statuses/idle.png" />
+	<link rel="icon" href="/statuses/idle.png" />
 </svelte:head>
 
 {#if $lanyard}
@@ -76,22 +76,24 @@
 
 				<img
 					src={`https://api.lanyard.rest/${PUBLIC_ID}.png`}
-					class="rounded-full z-[60] absolute -bottom-[48px] left-[24px] w-[120px] h-[120px] mx-auto"
+					class="rounded-full z-[60] absolute sm:top-[140px] left-[3.7vw] top-[23vw] sm:left-[24px] w-[20vw] h-[20vw] sm:w-[120px] sm:h-[120px] mx-auto"
 					alt="pfp"
 				/>
 
 				<img
 					src={`/statuses/${$lanyard.discord_status}.png`}
-					class="w-9 h-9 absolute left-[108px] -bottom-[50px] z-[70] bg-[#000000d0] p-[6px] rounded-full"
+					class="w-8 h-8 sm:w-9 sm:h-9 absolute left-[18vw] -bottom-[9vw] sm:left-[108px] sm:-bottom-[50px] z-[70] bg-[#000000d0] p-[6px] rounded-full"
 					alt="status"
 				/>
 			</div>
 
-			<div class="flex flex-row space-x-0.5 z-30 w-fit ml-40 mt-4 bg-[#00000073] px-1 py-0.5 rounded-lg">
-				{#each badges as badge}
-					<img src={`/badges/${badge.icon}.svg`} alt={badge.name} />
-				{/each}
-			</div>
+            <div class="relative pb-10">
+                <div class="flex flex-row space-x-0.5 z-30 w-fit absolute right-2 sm:left-40 mt-4 bg-[#00000073] px-1 py-0.5 rounded-lg">
+                    {#each badges as badge}
+                        <img src={`/badges/${badge.icon}.svg`} alt={badge.name} />
+                    {/each}
+                </div>
+            </div>
 
 			<div class="content">
 				<div class="text-xl font-semibold flex flex-row">
@@ -121,7 +123,7 @@
 
 					<div class="min-w-full min-h-[1px] bg-zinc-700 !mt-8" />
 
-					<div class="grid grid-cols-2 gap-x-4 gap-y-4">
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4">
 						{#each connections as connection}
 							<div class="rounded-md p-3 items-center flex flex-row text-center border-zinc-700 border-[1px]">
 								<img src={`/icons/${connection.icon}.svg`} alt={connection.name} class="w-6 h-6" />
