@@ -3,27 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-	.profile {
-		@apply m-auto 
-        relative
-        flex flex-col 
-        pb-6 p-1
-        max-h-[650px] w-[38rem]
-        rounded-lg
-        before:bg-[#0009] before:absolute before:h-[calc(100%-8px)] before:w-[calc(100%-8px)] before:rounded-lg;
-	}
-
-	.content {
-		@apply bg-[#00000073] 
-        overflow-hidden hover:overflow-y-scroll 
-        w-[93%] 
-        min-h-full 
-        rounded-lg 
-        mx-auto mt-[10vh] sm:mt-16
-        z-30 
-        p-3 
-        flex flex-col space-y-4
-        scrollbar;
+	.scrollbar-stable {
 		scrollbar-gutter: stable;
 	}
 
@@ -55,10 +35,6 @@
 	.scrollbar::-webkit-scrollbar-thumb {
 		@apply bg-[#ffffff3d] rounded-full;
 	}
-
-    .input {
-        @apply bg-black rounded-lg placeholder:text-zinc-500 focus:outline-violet-600 outline-none w-full p-3 h-10 text-sm;
-    }
 }
 
 @font-face {

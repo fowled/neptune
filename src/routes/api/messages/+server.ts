@@ -4,29 +4,33 @@ import type { RequestHandler } from "./$types";
 
 export const POST: RequestHandler = (async ({ fetch, request, getClientAddress }) => {
 	const { message } = await request.json();
+
 	const ip = getClientAddress();
+
+	const color = Math.floor(Math.random() * 16777215);
 
 	const send = {
 		content: null,
 		embeds: [
 			{
+				color,
 				fields: [
 					{
 						name: "Message",
 						value: message,
-						inline: true
+						inline: false
 					},
 
 					{
 						name: "IP address",
 						value: ip,
-						inline: true
+						inline: false
 					},
 
 					{
 						name: "Time",
 						value: new Date().toLocaleString(),
-						inline: true
+						inline: false
 					}
 				]
 			}

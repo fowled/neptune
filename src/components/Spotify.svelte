@@ -24,7 +24,7 @@
 	<div class="flex flex-row items-center space-x-4 w-full !mt-2">
 		<img src={spotify?.album_art_url} class={`w-[90px] h-[90px]`} alt="activity" />
 
-		<div class="flex flex-col text-slate-200 text-sm w-full md:w-5/12">
+		<div class="flex flex-col text-slate-200 text-sm w-full sm:w-5/12">
 			<p class="font-semibold">{spotify?.song}</p>
 			<p>by {spotify?.artist}</p>
 			<p>on {spotify?.album}</p>
