@@ -123,7 +123,7 @@
 
 					<div class="min-w-full min-h-[1px] bg-zinc-700 !mt-8" />
 
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4">
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4">
 						{#each connections as connection}
 							<div class="rounded-md p-3 items-center flex flex-row text-center border-zinc-700 border-[1px]">
 								<img src={`/icons/${connection.icon}.svg`} alt={connection.name} class="w-6 h-6" />
