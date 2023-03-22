@@ -85,12 +85,12 @@
 
 				<img
 					src={`/statuses/${$lanyard.discord_status}.png`}
-					class="absolute left-[18vw] -bottom-[9vw] z-[70] h-8 w-8 rounded-full bg-[#000000d0] p-[6px] sm:left-[108px] sm:-bottom-[50px] sm:h-9 sm:w-9"
+					class="absolute left-[18vw] -bottom-[9vw] z-[70] h-7 w-7 rounded-full bg-[#000000d0] p-[6px] sm:left-[108px] sm:-bottom-[50px] sm:h-9 sm:w-9"
 					alt="status"
 				/>
 			</div>
 
-			<div class="relative">
+			<div class="relative pb-16">
 				<div
 					class="absolute right-5 z-30 mt-4 flex w-fit flex-row space-x-0.5 rounded-lg bg-[#00000073] px-1 py-0.5 sm:left-40"
 				>
@@ -101,7 +101,7 @@
 			</div>
 
 			<div
-				class="scrollbar-stable scrollbar z-30 mx-auto mt-[10vh] flex min-h-full w-[93%] flex-col space-y-4 overflow-hidden rounded-lg bg-[#00000073] p-3 hover:overflow-y-scroll sm:mt-16"
+				class="scrollbar-stable scrollbar z-30 mx-auto flex min-h-full w-[93%] flex-col space-y-4 overflow-hidden rounded-lg bg-[#00000073] p-3 hover:overflow-y-scroll"
 			>
 				<div class="flex flex-row text-xl font-semibold">
 					<p>{user?.username}</p>
