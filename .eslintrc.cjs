@@ -22,5 +22,11 @@ module.exports = {
 		browser: true,
 		es2017: true,
 		node: true
-	}
+	},
+	"prettier/prettier": [
+		"error",
+		{
+			endOfLine: "auto"
+		}
+	]
 };
