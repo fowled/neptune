@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { PaperAirplane, Icon } from "svelte-hero-icons";
-
 	import Activity from "@/components/profile/Activity.svelte";
 	import Spotify from "@/components/profile/Spotify.svelte";
 	import Tooltip from "@/components/shared/Tooltip.svelte";
@@ -23,8 +21,7 @@
 
 	$: buttons = [
 		{ name: "info", label: "User Info" },
-		{ name: "activity", label: "Activity", enabled: activities?.length > 0 ? true : false },
-		{ name: "message", label: "Send message" }
+		{ name: "activity", label: "Activity", enabled: activities?.length > 0 ? true : false }
 	];
 
 	$: sections = [
@@ -45,23 +42,21 @@
 		activeTab = "info";
 	}
 
-	$: buttonStyle = (button: (typeof buttons)[number]) => {
-		if (activeTab === button.name) {
-			return "text-white border-b-2 border-separate pb-4";
-		} else {
-			return "text-gray-400";
-		}
-	};
-
 	type Tooltips = {
 		badges: HTMLElement[];
-		connections: HTMLElement[];
+		connections: {
+			name: HTMLElement[];
+			verified: HTMLElement[];
+		};
 		status?: HTMLElement;
 	};
 
 	let tooltips: Tooltips = {
 		badges: [] as HTMLElement[],
-		connections: [] as HTMLElement[]
+		connections: {
+			name: [] as HTMLElement[],
+			verified: [] as HTMLElement[]
+		}
 	};
 </script>
 
@@ -112,15 +107,19 @@
 		</div>
 
 		<div class="flex flex-row space-x-8 border-b-2 border-zinc-700 text-sm">
-			{#each buttons as button}
-				{#if button.enabled !== false}
-					<div>
-						<button class={buttonStyle(button)} on:click={() => (activeTab = button.name)}>
+			{#if activities.length > 0}
+				{#each buttons as button}
+					{#if button.enabled !== false}
+						<button
+							class:btn-not-selected={activeTab !== button.name}
+							class="box-border border-separate border-b-2 pb-4 text-white"
+							on:click={() => (activeTab = button.name)}
+						>
 							{button.label}
 						</button>
-					</div>
-				{/if}
-			{/each}
+					{/if}
+				{/each}
+			{/if}
 		</div>
 
 		{#if activeTab === "info"}
@@ -136,13 +135,20 @@
 			<div class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
 				{#each connections as connection, i}
 					<div class="flex flex-row items-center rounded-md border-[1px] border-zinc-700 p-3 text-center">
-						<img src="/icons/{connection.icon}.svg" alt={connection.name} class="h-6 w-6" />
+						<img
+							src="/icons/{connection.icon}.svg"
+							alt={connection.name}
+							class="h-6 w-6"
+							bind:this={tooltips.connections.name[i]}
+						/>
+
+						<Tooltip el={tooltips.connections.name[i]} direction="top" content={connection.name} top={45} />
 
 						<p class="ml-2 mr-1 font-semibold">{connection.username}</p>
 
-						<img src="/icons/verified.svg" alt="tick" class="h-4 w-4" bind:this={tooltips.connections[i]} />
+						<img src="/icons/verified.svg" alt="tick" class="h-4 w-4" bind:this={tooltips.connections.verified[i]} />
 
-						<Tooltip el={tooltips.connections[i]} direction="top" content="Verified Connection" top={45} />
+						<Tooltip el={tooltips.connections.verified[i]} direction="top" content="Verified Connection" top={45} />
 
 						<a href={connection.url} class="ml-auto">
 							<img src="/icons/open_arrow.svg" alt="open arrow" class="h-2.5 w-2.5" />
@@ -150,7 +156,7 @@
 					</div>
 				{/each}
 			</div>
-		{:else if activeTab === "activity"}
+		{:else}
 			{#each $lanyard.activities as activity}
 				{#if activity.type === Activities.Spotify}
 					<Spotify {spotify} />
@@ -158,19 +164,41 @@
 					<Activity {activity} />
 				{/if}
 			{/each}
-		{:else if activeTab === "message"}
-			<form method="post" class="flex w-full flex-row items-center space-x-2">
-				<input
-					class="h-10 w-full rounded-lg bg-black p-3 text-sm outline-none placeholder:text-zinc-500 focus:outline-violet-600"
-					name="message"
-					placeholder="hi!"
-					required
-				/>
-
-				<button type="submit" class="cursor-pointer rounded-lg bg-purple-500 p-1.5 hover:bg-purple-700">
-					<Icon class="h-6 w-6" src={PaperAirplane} />
-				</button>
-			</form>
 		{/if}
 	</div>
 </div>
+
+<style lang="css">
+	.btn-not-selected {
+        box-sizing: border-box;
+        border-color: transparent;
+        color: rgb(156 163 175);
+	}
+
+	.scrollbar-stable {
+		scrollbar-gutter: stable;
+	}
+
+	.mask-banner {
+		-webkit-mask-image: url("/masks/banner.svg");
+		mask: url("/masks/banner.svg");
+		-webkit-mask-size: cover;
+	}
+
+	.profile-gradient {
+		background: linear-gradient(#471f61, #471f61 120px, #640ec7);
+	}
+
+	.scrollbar {
+		scrollbar-color: #ffffff3d transparent;
+		scrollbar-width: thin;
+	}
+
+	.scrollbar::-webkit-scrollbar {
+		@apply w-1.5;
+	}
+
+	.scrollbar::-webkit-scrollbar-thumb {
+		@apply rounded-full bg-[#ffffff3d];
+	}
+</style>

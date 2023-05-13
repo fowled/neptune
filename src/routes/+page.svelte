@@ -13,7 +13,7 @@
 </script>
 
 {#if $lanyard}
-	<div class="flex min-h-screen items-center bg-zinc-800 text-white">
+	<div class="flex min-h-screen w-screen items-center justify-center bg-[#1e1f22] text-white">
 		<Profile />
 	</div>
 {:else}

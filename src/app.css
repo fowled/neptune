@@ -2,41 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-	.scrollbar-stable {
-		scrollbar-gutter: stable;
-	}
-
-    .mask-banner {
-        -webkit-mask-image: url("/masks/banner.svg");
-        mask: url("/masks/banner.svg");
-        -webkit-mask-size: cover;
-    }
-
-    .mask-game {
-        -webkit-mask-image: url("/masks/game.svg");
-        -webkit-mask-size: 100%;
-        mask: url("/masks/game.svg");
-    }
-
-	.profile-gradient {
-		background: linear-gradient(#471f61, #471f61 120px, #640ec7);
-	}
-
-	.scrollbar {
-		scrollbar-color: #ffffff3d transparent;
-		scrollbar-width: thin;
-	}
-
-	.scrollbar::-webkit-scrollbar {
-		@apply w-1.5;
-	}
-
-	.scrollbar::-webkit-scrollbar-thumb {
-		@apply bg-[#ffffff3d] rounded-full;
-	}
-}
-
 @font-face {
 	font-family: "GG";
 	font-weight: 100;

@@ -26,12 +26,16 @@ export function getBadges(publicFlags: number) {
 	const nitroSub = new Date("8/8/2021");
 	const startedBoosting = new Date("7/5/2022");
 
-	const displayOptions = { month: "short", day: "numeric", year: "numeric" } as const;
+	const displayOptions = <const>{ month: "short", day: "numeric", year: "numeric" };
+
+    const nitroBadgeEvolutionMonths = [1, 2, 3, 6, 9, 12, 15, 18, 24];
+
+    const getClosestBadge = nitroBadgeEvolutionMonths.reverse().find(e => e <= monthDiff(startedBoosting, new Date()));
 
 	badges.push(
 		{ name: "nitro", display: `Subscriber since ${nitroSub.toLocaleDateString("en-US", displayOptions)}` },
 		{
-			name: "boost_" + monthDiff(startedBoosting, new Date()),
+			name: "boost_" + getClosestBadge,
 			display: `Server boosting since ${startedBoosting.toLocaleDateString("en-US", displayOptions)}`
 		}
 	);
