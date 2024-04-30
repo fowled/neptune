@@ -13,8 +13,14 @@
 </script>
 
 {#if $lanyard}
-	<div class="flex min-h-screen w-screen items-center justify-center bg-[#1e1f22] text-white">
+	<div class="flex w-screen items-center text-white h-screen bg-cover justify-center bg-[url('/wallpaper.jpg')]">
+		<!-- <div class="flex-1">
+			<Servers />
+		</div> -->
+
 		<Profile />
+
+		<!-- <div class="flex-1" /> -->
 	</div>
 {:else}
 	<Spinner />

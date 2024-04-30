@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { Icon, PaperAirplane } from "svelte-hero-icons";
+
+	import { enhance } from "$app/forms";
+
 	import Activity from "@/components/profile/Activity.svelte";
 	import Spotify from "@/components/profile/Spotify.svelte";
 	import Tooltip from "@/components/shared/Tooltip.svelte";
@@ -21,7 +25,8 @@
 
 	$: buttons = [
 		{ name: "info", label: "User Info" },
-		{ name: "activity", label: "Activity", enabled: activities?.length > 0 ? true : false }
+		{ name: "activity", label: "Activity", enabled: activities?.length > 0 ? true : false },
+		{ name: "message", label: "Send message" }
 	];
 
 	$: sections = [
@@ -32,7 +37,6 @@
 
 	const connections = [
 		{ name: "Telegram", icon: "telegram", username: "fowled", url: "https://t.me/fowled" },
-		{ name: "Twitter", icon: "twitter", username: "fowledsucks", url: "https://twitter.com/fowledsucks" },
 		{ name: "GitHub", icon: "github", username: "fowled", url: "https://github.com/fowled" }
 	];
 
@@ -66,7 +70,7 @@
 </svelte:head>
 
 <div
-	class="profile-gradient relative m-auto flex max-h-[650px] w-[38rem] flex-col rounded-lg p-1 pb-6 before:absolute before:h-[calc(100%-8px)] before:w-[calc(100%-8px)] before:rounded-lg before:bg-[#0009]"
+	class="profile-gradient relative m-auto flex max-h-[650px] w-[38rem] flex-col rounded-lg p-1 pb-6 shadow-lg shadow-black before:absolute before:h-[calc(100%-8px)] before:w-[calc(100%-8px)] before:rounded-lg before:bg-[#0009]"
 >
 	<div class="relative">
 		<img src="/banner.png" alt="banner" class="mask-banner z-[1] h-full w-full" />
@@ -78,8 +82,8 @@
 		/>
 
 		<img
-			src="/statuses/{$lanyard.discord_status}.png"
-			class="absolute left-[18vw] -bottom-[9vw] z-[2] h-7 w-7 rounded-full bg-[#000000d0] p-[6px] sm:left-[108px] sm:-bottom-[50px] sm:h-9 sm:w-9"
+			src="/statuses/{$lanyard.discord_status}.svg"
+			class="absolute left-[18vw] -bottom-[9vw] z-[2] h-7 w-7 rounded-full bg-[#10071d] p-[6px] sm:left-[108px] sm:-bottom-[50px] sm:h-9 sm:w-9"
 			alt="status"
 			bind:this={tooltips.status}
 		/>
@@ -101,9 +105,9 @@
 	<div
 		class="scrollbar-stable scrollbar test z-[3] mx-auto flex min-h-full w-[93%] flex-col space-y-4 overflow-y-hidden rounded-lg bg-[#00000073] p-3 hover:overflow-y-scroll"
 	>
-		<div class="flex flex-row text-xl font-semibold">
-			<p>{user?.username}</p>
-			<p class="text-gray-300">#{user?.discriminator}</p>
+		<div class="flex flex-col text-xl font-semibold">
+			<p>Maxan</p>
+			<p class="text-sm text-gray-300">{user?.username}</p>
 		</div>
 
 		<div class="flex flex-row space-x-8 border-b-2 border-zinc-700 text-sm">
@@ -156,7 +160,7 @@
 					</div>
 				{/each}
 			</div>
-		{:else}
+		{:else if activeTab === "activity"}
 			{#each $lanyard.activities as activity}
 				{#if activity.type === Activities.Spotify}
 					<Spotify {spotify} />
@@ -164,15 +168,28 @@
 					<Activity {activity} />
 				{/if}
 			{/each}
+		{:else if activeTab === "message"}
+			<form method="POST" use:enhance class="flex w-full flex-row items-center space-x-2">
+				<input
+					class="h-10 w-full rounded-lg bg-black p-3 text-sm outline-none placeholder:text-zinc-500 focus:outline-violet-600"
+					name="message"
+					placeholder="Type your message..."
+					required
+				/>
+
+				<button type="submit" class="cursor-pointer rounded-lg bg-purple-500 p-1.5 hover:bg-purple-700">
+					<Icon class="h-6 w-6" src={PaperAirplane} />
+				</button>
+			</form>
 		{/if}
 	</div>
 </div>
 
 <style lang="css">
 	.btn-not-selected {
-        box-sizing: border-box;
-        border-color: transparent;
-        color: rgb(156 163 175);
+		box-sizing: border-box;
+		border-color: transparent;
+		color: rgb(156 163 175);
 	}
 
 	.scrollbar-stable {
