@@ -36,9 +36,9 @@
 	];
 
 	$: sections = [
-		{ title: "About me", content: "TypeScript enthusiast. Owns <b>@Mango</b>." },
+		{ title: "About me", content: "I'm a CS student at EPITA (Rennes, FR)." },
 		{ title: "Discord member since", content: snowflake(parseInt(user?.id)) },
-		{ title: "Note", content: "Did you know you can send me a message directly from this website?" }
+		{ title: "Note", content: "Contact me by clicking the 'Send message' button right above!" }
 	];
 
 	const connections = [
