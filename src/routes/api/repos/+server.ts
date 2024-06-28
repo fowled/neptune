@@ -4,7 +4,7 @@ import type { RequestHandler } from "./$types";
 import { SECRET_GITHUB_PAT } from "$env/static/private";
 
 export const GET: RequestHandler = async ({ setHeaders }) => {
-	const repos = ["mango", "scratchlib", "sapphire", "amethyst", "neptune"];
+	const repos = ["mango", "sapphire", "amethyst", "neptune", "emerald", "nitrogen"];
 
 	const info = [] as Repository[];
 
@@ -18,9 +18,11 @@ export const GET: RequestHandler = async ({ setHeaders }) => {
 		})
 	);
 
+	info.sort((a, b) => b.stargazers_count - a.stargazers_count);
+
 	setHeaders({
 		"cache-control": "max-age=60"
 	});
 
-	return new Response(JSON.stringify(info), { status: 302 });
+	return new Response(JSON.stringify(info), { status: 200 });
 };

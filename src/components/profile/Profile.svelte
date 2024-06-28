@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { Icon, PaperAirplane } from "svelte-hero-icons";
+	import { onMount } from "svelte";
+
+	import { PUBLIC_NAME } from "$env/static/public";
 
 	import { enhance } from "$app/forms";
 
@@ -12,10 +15,12 @@
 	import { getBadges } from "@/lib/flags";
 
 	import { capitalize } from "@/utils/capitalize";
+	import { getCircle } from "@/utils/circle";
 
 	import { PUBLIC_ID } from "$env/static/public";
 
 	import { Activities } from "@/types/lanyard";
+	import type { Repository } from "@/types/github";
 
 	import "@/app.css";
 
@@ -26,6 +31,7 @@
 	$: buttons = [
 		{ name: "info", label: "User Info" },
 		{ name: "activity", label: "Activity", enabled: activities?.length > 0 ? true : false },
+		{ name: "work", label: "Work" },
 		{ name: "message", label: "Send message" }
 	];
 
@@ -62,6 +68,18 @@
 			verified: [] as HTMLElement[]
 		}
 	};
+
+	let repos = <Repository[]>[];
+
+	onMount(async () => {
+		const response = await fetch("/api/repos");
+
+		if (response.ok) {
+			repos = await response.json();
+		} else {
+			console.error("Failed to fetch repos");
+		}
+	});
 </script>
 
 <svelte:head>
@@ -77,13 +95,13 @@
 
 		<img
 			src="https://api.lanyard.rest/{PUBLIC_ID}.png"
-			class="absolute left-[3.7vw] top-[23vw] z-[2] mx-auto h-[20vw] w-[20vw] rounded-full sm:top-[140px] sm:left-[24px] sm:h-[120px] sm:w-[120px]"
+			class="absolute left-[3.7vw] top-[23vw] z-[2] mx-auto h-[20vw] w-[20vw] rounded-full sm:left-[24px] sm:top-[140px] sm:h-[120px] sm:w-[120px]"
 			alt="pfp"
 		/>
 
 		<img
 			src="/statuses/{$lanyard.discord_status}.svg"
-			class="absolute left-[18vw] -bottom-[9vw] z-[2] h-7 w-7 rounded-full bg-[#10071d] p-[6px] sm:left-[108px] sm:-bottom-[50px] sm:h-9 sm:w-9"
+			class="absolute -bottom-[9vw] left-[18vw] z-[2] h-7 w-7 rounded-full bg-[#10071d] p-[6px] sm:-bottom-[50px] sm:left-[108px] sm:h-9 sm:w-9"
 			alt="status"
 			bind:this={tooltips.status}
 		/>
@@ -106,24 +124,22 @@
 		class="scrollbar-stable scrollbar test z-[3] mx-auto flex min-h-full w-[93%] flex-col space-y-4 overflow-y-hidden rounded-lg bg-[#00000073] p-3 hover:overflow-y-scroll"
 	>
 		<div class="flex flex-col text-xl font-semibold">
-			<p>Maxan</p>
+			<p>{PUBLIC_NAME}</p>
 			<p class="text-sm text-gray-300">{user?.username}</p>
 		</div>
 
 		<div class="flex flex-row space-x-8 border-b-2 border-zinc-700 text-sm">
-			{#if activities.length > 0}
-				{#each buttons as button}
-					{#if button.enabled !== false}
-						<button
-							class:btn-not-selected={activeTab !== button.name}
-							class="box-border border-separate border-b-2 pb-4 text-white"
-							on:click={() => (activeTab = button.name)}
-						>
-							{button.label}
-						</button>
-					{/if}
-				{/each}
-			{/if}
+			{#each buttons as button}
+				{#if button.enabled !== false}
+					<button
+						class:btn-not-selected={activeTab !== button.name}
+						class="box-border border-separate border-b-2 pb-4 text-white"
+						on:click={() => (activeTab = button.name)}
+					>
+						{button.label}
+					</button>
+				{/if}
+			{/each}
 		</div>
 
 		{#if activeTab === "info"}
@@ -168,6 +184,33 @@
 					<Activity {activity} />
 				{/if}
 			{/each}
+		{:else if activeTab === "work"}
+			<ul class="md:grid-cols-3 grid gap-4 sm:grid-cols-2">
+				{#each repos as repo}
+					<a
+						class="grid gap-2.5 rounded-xl border-[1.5px] border-zinc-700 p-4 transition-all duration-100 hover:border-zinc-600"
+						href={repo.html_url}
+					>
+						<p class="font-semibold">{repo.name}</p>
+						<p class="text-sm opacity-70">{repo.description}</p>
+
+						<div class="flex items-center gap-2.5 text-sm">
+							<div class="flex items-center gap-1">
+								<span
+									class="inline-block h-3 w-3 rounded-full"
+									style="background-color: {getCircle(repo.language.toLowerCase())}"
+								/>
+								<span class="opacity-70">{repo.language}</span>
+							</div>
+
+							<div class="flex items-center gap-1">
+								<img src="/icons/star.svg" alt="star icon" class="h-3 w-3" />
+								<span class="opacity-70">{repo.stargazers_count}</span>
+							</div>
+						</div>
+					</a>
+				{/each}
+			</ul>
 		{:else if activeTab === "message"}
 			<form method="POST" use:enhance class="flex w-full flex-row items-center space-x-2">
 				<input

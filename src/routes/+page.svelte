@@ -12,16 +12,10 @@
 	});
 </script>
 
-{#if $lanyard}
-	<div class="flex w-screen items-center text-white h-screen bg-cover justify-center bg-[url('/wallpaper.jpg')]">
-		<!-- <div class="flex-1">
-			<Servers />
-		</div> -->
-
+<div class="flex h-screen w-screen items-center justify-center bg-[url('/wallpaper.jpg')] bg-cover text-white">
+	{#if $lanyard}
 		<Profile />
-
-		<!-- <div class="flex-1" /> -->
-	</div>
-{:else}
-	<Spinner />
-{/if}
+	{:else}
+		<Spinner />
+	{/if}
+</div>
